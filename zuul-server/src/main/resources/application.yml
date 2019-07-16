@@ -16,3 +16,5 @@ zuul:
       serviceId: users
   host:
     socket-timeout-millis: 30000
+swagger:
+  enabled: true
