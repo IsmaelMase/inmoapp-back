@@ -8,10 +8,12 @@ import org.springframework.web.bind.annotation.RestController;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 @SpringBootApplication
 @EnableDiscoveryClient
 @RestController()
+@EnableSwagger2
 @Api(tags = "zuul inside rest api")
 public class UserComponentApplication {
 
