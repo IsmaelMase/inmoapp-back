@@ -14,6 +14,8 @@ zuul:
   routes:
     users:
       serviceId: users
+    real-estate:
+      serviceId: real-estate
   host:
     socket-timeout-millis: 30000
 swagger:

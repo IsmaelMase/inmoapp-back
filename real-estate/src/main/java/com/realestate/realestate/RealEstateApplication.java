@@ -1,4 +1,4 @@
-package com.users.User.component;
+package com.realestate.realestate;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -9,10 +9,10 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 @SpringBootApplication
 @EnableDiscoveryClient
 @EnableSwagger2
-public class UserComponentApplication {
+public class RealEstateApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(UserComponentApplication.class, args);
+		SpringApplication.run(RealEstateApplication.class, args);
 	}
 
 }

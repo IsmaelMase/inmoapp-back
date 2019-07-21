@@ -57,7 +57,7 @@ public class SwaggerConfig implements SwaggerResourcesProvider {
 	public List<SwaggerResource> get() {
 		// Dynamic introduction of micro services using routeLocator
 		List<SwaggerResource> resources = new ArrayList();
-		resources.add(swaggerResource("zuul-server", "/v2/api-docs", "1.0"));
+
 		// Recycling Lambda expressions to simplify code
 		for (Route route : routeLocator.getRoutes()) {
 			resources.add(swaggerResource(route.getId(), route.getFullPath().replace("**", "v2/api-docs"), "1.0"));

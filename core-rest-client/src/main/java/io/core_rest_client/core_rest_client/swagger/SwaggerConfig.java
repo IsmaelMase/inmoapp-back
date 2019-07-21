@@ -2,6 +2,7 @@ package io.core_rest_client.core_rest_client.swagger;
 
 import java.util.Arrays;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,8 +17,14 @@ import springfox.documentation.builders.ApiInfoBuilder;
 import springfox.documentation.builders.PathSelectors;
 import springfox.documentation.builders.RequestHandlerSelectors;
 import springfox.documentation.service.ApiInfo;
+import springfox.documentation.service.ApiKey;
+import springfox.documentation.service.AuthorizationScope;
+import springfox.documentation.service.SecurityReference;
 import springfox.documentation.spi.DocumentationType;
+import springfox.documentation.spi.service.contexts.SecurityContext;
 import springfox.documentation.spring.web.plugins.Docket;
+import springfox.documentation.swagger.web.SecurityConfiguration;
+import springfox.documentation.swagger.web.SecurityConfigurationBuilder;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 //Anotar como  configuración de Spring
@@ -59,10 +66,10 @@ public class SwaggerConfig {
 
 		Docket docket = new Docket(DocumentationType.SWAGGER_2).apiInfo(apiInfo())
 				.produces(DEFAULT_PRODUCES_AND_CONSUMES).consumes(DEFAULT_PRODUCES_AND_CONSUMES).select()
-				.paths(PathSelectors.any()).paths(Predicates.not(PathSelectors.regex("/error")))
+				.paths(PathSelectors.any())
 				.apis(Predicates.not(RequestHandlerSelectors.basePackage("org.springframework.boot"))).build();
 
-		// docket.securitySchemes(Arrays.asList(apiKey())).securityContexts(Arrays.asList(securityContext()));
+		docket.securitySchemes(Arrays.asList(apiKey())).securityContexts(Arrays.asList(securityContext()));
 		return docket;
 	}
 
@@ -77,29 +84,26 @@ public class SwaggerConfig {
 		return new ApiInfoBuilder().title("AppIn Backend").description("Swagger").version("0.1").build();
 	}
 
-	// private ApiKey apiKey() {
-	// return new ApiKey("apiKey", "Authorization", "header");
-	// }
+	private ApiKey apiKey() {
+		return new ApiKey("apiKey", "Authorization", "header");
+	}
 
-	// @Bean
-	// public SecurityConfiguration security() {
-	// return
-	// SecurityConfigurationBuilder.builder().scopeSeparator(",").additionalQueryStringParams(null)
-	// .useBasicAuthenticationWithAccessCodeGrant(false).build();
-	// }
-	//
-	// private SecurityContext securityContext() {
-	// return
-	// SecurityContext.builder().securityReferences(defaultAuth()).forPaths(PathSelectors.any()).build();
-	// }
-	//
-	// private List<SecurityReference> defaultAuth() {
-	// AuthorizationScope authorizationScope = new AuthorizationScope("global",
-	// "accessEverything");
-	// AuthorizationScope[] authorizationScopes = new AuthorizationScope[1];
-	// authorizationScopes[0] = authorizationScope;
-	// return Arrays.asList(new SecurityReference("apiKey", authorizationScopes));
-	// }
+	@Bean
+	public SecurityConfiguration security() {
+		return SecurityConfigurationBuilder.builder().scopeSeparator(",").additionalQueryStringParams(null)
+				.useBasicAuthenticationWithAccessCodeGrant(false).build();
+	}
+
+	private SecurityContext securityContext() {
+		return SecurityContext.builder().securityReferences(defaultAuth()).forPaths(PathSelectors.any()).build();
+	}
+
+	private List<SecurityReference> defaultAuth() {
+		AuthorizationScope authorizationScope = new AuthorizationScope("global", "accessEverything");
+		AuthorizationScope[] authorizationScopes = new AuthorizationScope[1];
+		authorizationScopes[0] = authorizationScope;
+		return Arrays.asList(new SecurityReference("apiKey", authorizationScopes));
+	}
 
 	/**
 	 * @return the applicationName
