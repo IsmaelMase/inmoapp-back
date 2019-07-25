@@ -1,14 +1,14 @@
 spring:
   data:
     mongodb:
-      database: users
+      database: tasks
       uri: mongodb://localhost:27017
   application:
-    name: users
+    name: tasks
 server:
 #  servlet:
 #   context-path: /users
-  port: 8080
+  port: 8082
 eureka:
   client:
     serviceUrl:
