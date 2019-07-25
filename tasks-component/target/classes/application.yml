@@ -1,0 +1,19 @@
+spring:
+  data:
+    mongodb:
+      database: tasks
+      uri: mongodb://localhost:27017
+  application:
+    name: tasks
+server:
+#  servlet:
+#   context-path: /users
+  port: 8082
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka/
+  instance:
+    preferIpAddress: true
+swagger:
+  enabled: true
