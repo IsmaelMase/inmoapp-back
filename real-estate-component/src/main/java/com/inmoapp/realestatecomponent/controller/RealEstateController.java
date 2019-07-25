@@ -20,32 +20,37 @@ import com.inmoapp.realestatecomponent.model.RealEstateModel;
 import com.inmoapp.realestatecomponent.service.RealEstateService;
 
 import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 
 @RestController
 @RequestMapping("/realEstate")
 @CrossOrigin("*")
-@Api(tags = "Real Estate Api")
+@Api(tags = "real-estate-component")
 public class RealEstateController {
 	@Autowired
 	@Qualifier("realEstateService")
 	private RealEstateService realEstateService;
 
-	@GetMapping(value = "/realEstate/{id}")
+	@GetMapping(value = "/{id}")
+	@ApiOperation(value = "Find real estate by id")
 	public RealEstateModel getRealEstateById(@PathVariable("id") String id) {
 		return realEstateService.findById(id);
 	}
 
-	@GetMapping(value = "/realEstate/all")
+	@GetMapping(value = "/all")
+	@ApiOperation(value = "Find all real estate")
 	public List<RealEstateModel> getAllRealEstate() {
 		return realEstateService.findAll();
 	}
 
-	@PostMapping(value = "/realEstate/save")
+	@PostMapping(value = "/save")
+	@ApiOperation(value = "Save real estate")
 	public ResponseEntity<RealEstateModel> saveRealEstate(@Valid @RequestBody RealEstateModel realEstate) {
 		return realEstateService.addRealEstate(realEstate);
 	}
 
-	@DeleteMapping(value = "/realEstate/{id}/delete")
+	@DeleteMapping(value = "/delete/{id}")
+	@ApiOperation(value = "Delete real estate by id")
 	public ResponseEntity<String> deleteRealEstate(@PathVariable("id") String id) {
 		return realEstateService.removeRealEstate(id);
 	}

@@ -20,6 +20,7 @@ import com.inmoapp.usercomponent.model.UserModel;
 import com.inmoapp.usercomponent.service.UserService;
 
 import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 
 @RestController
 @RequestMapping("/users")
@@ -31,27 +32,32 @@ public class UserController {
 	@Qualifier("userService")
 	private UserService userService;
 
-	@GetMapping(value = "/user/{id}")
+	@GetMapping(value = "/{id}")
+	@ApiOperation(value = "Find user by id")
 	public UserModel getUserById(@PathVariable("id") String id) {
 		return userService.findById(id);
 	}
 
-	@GetMapping(value = "/user/{realEstateId}")
+	@GetMapping(value = "/{realEstateId}")
+	@ApiOperation(value = "Find users by real estate ID")
 	public List<UserModel> getUsersEstateId(@PathVariable("id") String realEstateId) {
 		return userService.findByRealEstateId(realEstateId);
 	}
 
-	@GetMapping(value = "/user/all")
+	@GetMapping(value = "/all")
+	@ApiOperation(value = "Find all users")
 	public List<UserModel> getAllUsers() {
 		return userService.findAll();
 	}
 
-	@PostMapping(value = "/user/save")
+	@PostMapping(value = "/save")
+	@ApiOperation(value = "Save user")
 	public ResponseEntity<UserModel> saveUser(@Valid @RequestBody UserModel user) {
 		return userService.addUser(user);
 	}
 
-	@DeleteMapping(value = "/user/{id}/delete")
+	@DeleteMapping(value = "/delete/{id}")
+	@ApiOperation(value = "Delete user")
 	public ResponseEntity<String> deleteUser(@PathVariable("id") String id) {
 		return userService.removeUser(id);
 	}
