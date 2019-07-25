@@ -32,13 +32,13 @@ public class UserController {
 	@Qualifier("userService")
 	private UserService userService;
 
-	@GetMapping(value = "/{id}")
+	@GetMapping(value = "findById/{id}")
 	@ApiOperation(value = "Find user by id")
 	public UserModel getUserById(@PathVariable("id") String id) {
 		return userService.findById(id);
 	}
 
-	@GetMapping(value = "/{realEstateId}")
+	@GetMapping(value = "findByRealEstate/{realEstateId}")
 	@ApiOperation(value = "Find users by real estate ID")
 	public List<UserModel> getUsersEstateId(@PathVariable("id") String realEstateId) {
 		return userService.findByRealEstateId(realEstateId);
