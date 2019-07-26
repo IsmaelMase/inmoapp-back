@@ -10,6 +10,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import com.inmoapp.usercomponent.client.RealEstateClient;
 import com.inmoapp.usercomponent.converter.UserConverter;
 import com.inmoapp.usercomponent.entity.UserEntity;
 import com.inmoapp.usercomponent.model.UserModel;
@@ -27,8 +28,8 @@ public class UserServiceImpl implements UserService {
 	@Qualifier("userConverter")
 	private UserConverter userConverter;
 
-	// @Autowired
-	// private RealEstateClient realEstateClient;
+	@Autowired
+	private RealEstateClient realEstateClient;
 
 	public List<UserModel> findAll() {
 
@@ -63,13 +64,13 @@ public class UserServiceImpl implements UserService {
 
 	public ResponseEntity<UserModel> addUser(UserModel userModel) {
 		try {
-			// if (realEstateClient.getRealEstateById(userModel.realEstateId) != null) {
-			UserEntity user = userRepository.save(userConverter.convertModel2Entity(userModel));
+			if (realEstateClient.getRealEstateById(userModel.realEstateId) != null) {
+				UserEntity user = userRepository.save(userConverter.convertModel2Entity(userModel));
 
-			return new ResponseEntity<UserModel>(userConverter.convertEntity2Model(user), HttpStatus.CREATED);
-			// } else {
-			// return new ResponseEntity<UserModel>(HttpStatus.NOT_FOUND);
-			// }
+				return new ResponseEntity<UserModel>(userConverter.convertEntity2Model(user), HttpStatus.CREATED);
+			} else {
+				return new ResponseEntity<UserModel>(HttpStatus.NOT_FOUND);
+			}
 
 		} catch (Exception e) {
 

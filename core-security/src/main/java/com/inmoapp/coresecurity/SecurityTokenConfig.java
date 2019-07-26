@@ -19,8 +19,10 @@ public class SecurityTokenConfig extends WebSecurityConfigurerAdapter {
 
 	private static final String[] AUTH_WHITELIST = {
 
-			// -- swagger ui
-			"/swagger-resources/**", "/swagger-ui.html", "/v2/api-docs", "/webjars/**" };
+			"/v2/api-docs/**", "/swagger-ui.html*/**", "/webjars/springfox-swagger-ui/**", "/images/**",
+			"/configuration/**", "/swagger-resources/**", "/favicon.ico", "/*/v2/api-docs/**", "/*/swagger-ui.html*/**",
+			"/*/webjars/springfox-swagger-ui/**", "/*/images/**", "/*/configuration/**", "/*/swagger-resources/**",
+			"/*/favicon.ico", "/actuator/**", "/oauth/**", "/auth-server/**", "/authTemis-server/**" };
 
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
