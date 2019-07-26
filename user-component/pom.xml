@@ -47,11 +47,11 @@
 			<artifactId>core-rest-client</artifactId>
 			<version>0.0.1</version>
 		</dependency>
-		<dependency>
+		<!--<dependency>
 			<groupId>io.core-security</groupId>
 			<artifactId>core-security</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
-		</dependency>
+		</dependency>-->
 		<dependency>
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>
