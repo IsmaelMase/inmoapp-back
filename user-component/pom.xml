@@ -10,13 +10,13 @@
 		<relativePath /> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.users</groupId>
-	<artifactId>User-component</artifactId>
+	<artifactId>user-component</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>users-component</name>
 	<description>Demo project for Spring Boot</description>
 
 	<properties>
-		<java.version>11</java.version>
+		<java.version>1.8</java.version>
 	</properties>
 
 	<dependencies>
@@ -47,11 +47,11 @@
 			<artifactId>core-rest-client</artifactId>
 			<version>0.0.1</version>
 		</dependency>
-		<!--<dependency>
+		<dependency>
 			<groupId>io.core-security</groupId>
 			<artifactId>core-security</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
-		</dependency>-->
+		</dependency>
 		<dependency>
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>

@@ -22,7 +22,7 @@ public class SecurityTokenConfig extends WebSecurityConfigurerAdapter {
 			"/v2/api-docs/**", "/swagger-ui.html*/**", "/webjars/springfox-swagger-ui/**", "/images/**",
 			"/configuration/**", "/swagger-resources/**", "/favicon.ico", "/*/v2/api-docs/**", "/*/swagger-ui.html*/**",
 			"/*/webjars/springfox-swagger-ui/**", "/*/images/**", "/*/configuration/**", "/*/swagger-resources/**",
-			"/*/favicon.ico", "/actuator/**", "/oauth/**", "/auth-server/**", "/authTemis-server/**" };
+			"*/*/favicon.ico", "/actuator/**", "/oauth/**", "/auth-server/**", "/authTemis-server/**" };
 
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
