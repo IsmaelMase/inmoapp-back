@@ -6,20 +6,31 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class UserModel {
+public class RealtorModel {
 
 	public String id;
+	@NotEmpty
 	public String dni;
+//	@NotEmpty
+//	public String userNick;
+	@NotEmpty
 	public String name;
-	public String subname1;
-	public String subname2;
+	@NotEmpty
+	public String subname;
+	@NotEmpty
 	public String emailContact;
+	@NotEmpty
 	public String phoneContact;
+	@NotEmpty
 	public String role;
+	@NotEmpty
 	public String realEstateId;
 }

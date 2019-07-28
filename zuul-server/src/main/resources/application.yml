@@ -12,8 +12,8 @@ eureka:
 zuul:
   #Service will be mapped under the /api URI
   routes:
-    users:
-      serviceId: users
+    realtor-manager:
+      serviceId: realtor-manager
     real-estate:
       serviceId: real-estate
     tasks:

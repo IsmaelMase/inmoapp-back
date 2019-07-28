@@ -1,7 +1,7 @@
 package com.inmoapp.realtormanager.model.exception;
 
-public class RealtorNotFoundException extends RuntimeException {
-    public RealtorNotFoundException(String realtorId) {
+public class RealtorNotFound extends RuntimeException {
+    public RealtorNotFound(String realtorId) {
         super("The user with id " + realtorId + " not found");
     }
 }

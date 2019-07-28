@@ -11,8 +11,8 @@
         <module name="real-estate-component" />
         <module name="tasks-component" />
         <module name="core-rest-client" />
+        <module name="realtor-manager" />
         <module name="Eureka-Server-App" />
-        <module name="user-component" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
@@ -20,8 +20,8 @@
       <module name="core-security" target="1.8" />
       <module name="Eureka-Server-App" target="1.8" />
       <module name="real-estate-component" target="1.8" />
+      <module name="realtor-manager" target="1.8" />
       <module name="tasks-component" target="1.8" />
-      <module name="user-component" target="1.8" />
       <module name="zuul-server" target="1.8" />
     </bytecodeTargetLevel>
   </component>
@@ -31,8 +31,8 @@
       <module name="core-rest-client" options="-parameters" />
       <module name="core-security" options="-parameters" />
       <module name="real-estate-component" options="-parameters" />
+      <module name="realtor-manager" options="-parameters" />
       <module name="tasks-component" options="-parameters" />
-      <module name="user-component" options="-parameters" />
       <module name="zuul-server" options="-parameters" />
     </option>
   </component>

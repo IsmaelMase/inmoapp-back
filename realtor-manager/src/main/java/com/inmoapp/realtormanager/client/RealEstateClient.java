@@ -1,11 +1,10 @@
-package com.inmoapp.usercomponent.client;
+package com.inmoapp.realtormanager.client;
 
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.inmoapp.usercomponent.model.RealEstateModel;
+import com.inmoapp.realtormanager.model.RealEstateModel;
 
 @FeignClient("real-estate")
 public interface RealEstateClient {

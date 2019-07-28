@@ -8,19 +8,19 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 
-@Document(collection = "users")
+@Document(collection = "realtors")
 @Getter
 @Setter
 @Builder
-@ApiModel(value = "User", description = "Model of users")
-public class UserEntity {
+@ApiModel(value = "Realtor", description = "Model of realtors")
+public class RealtorEntity {
 
 	@Id
 	public String id;
 	public String dni;
+//	public String userNick;
 	public String name;
-	public String subname1;
-	public String subname2;
+	public String subname;
 	public String emailContact;
 	public String phoneContact;
 	public String role;

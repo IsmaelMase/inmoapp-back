@@ -1,95 +1,83 @@
 package com.inmoapp.realtormanager.service.impl;
 
 import com.inmoapp.realtormanager.client.RealEstateClient;
-import com.inmoapp.realtormanager.converter.UserEntityToUserModel;
-import com.inmoapp.realtormanager.converter.UserModelToUserEntity;
-import com.inmoapp.realtormanager.entity.UserEntity;
-import com.inmoapp.realtormanager.model.UserModel;
-import com.inmoapp.realtormanager.repository.UserRepository;
-import com.inmoapp.realtormanager.service.UserService;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
+import com.inmoapp.realtormanager.converter.RealtorEntityToRealtorModel;
+import com.inmoapp.realtormanager.converter.RealtorModelToRealtorEntity;
+import com.inmoapp.realtormanager.entity.RealtorEntity;
+import com.inmoapp.realtormanager.model.RealtorModel;
+import com.inmoapp.realtormanager.model.exception.RealEstateNotFound;
+import com.inmoapp.realtormanager.model.exception.RealtorDniAlReadyExist;
+import com.inmoapp.realtormanager.model.exception.RealtorEmailAlReadyExist;
+import com.inmoapp.realtormanager.model.exception.RealtorNotFound;
+import com.inmoapp.realtormanager.repository.RealtorRepository;
+import com.inmoapp.realtormanager.service.RealtorService;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 
 @Service
-public class UserServiceImpl implements UserService {
+public class RealtorServiceImpl implements RealtorService {
 
-    private final UserRepository userRepository;
+    private final RealtorRepository realtorRepository;
 
-    private final UserEntityToUserModel userEntityToUserModel;
+    private final RealtorEntityToRealtorModel realtorEntityToRealtorModel;
 
-    private final UserModelToUserEntity userModelToUserEntity;
+    private final RealtorModelToRealtorEntity realtorModelToRealtorEntity;
 
     private final RealEstateClient realEstateClient;
 
-    public UserServiceImpl(UserRepository userRepository, UserEntityToUserModel userEntityToUserModel, UserModelToUserEntity userModelToUserEntity,
-                           RealEstateClient realEstateClient) {
-        this.userRepository = userRepository;
-        this.userEntityToUserModel = userEntityToUserModel;
-        this.userModelToUserEntity = userModelToUserEntity
+    public RealtorServiceImpl(RealtorRepository realtorRepository, RealtorEntityToRealtorModel realtorEntityToRealtorModel, RealtorModelToRealtorEntity realtorModelToRealtorEntity,
+                              RealEstateClient realEstateClient) {
+        this.realtorRepository = realtorRepository;
+        this.realtorEntityToRealtorModel = realtorEntityToRealtorModel;
+        this.realtorModelToRealtorEntity = realtorModelToRealtorEntity;
         this.realEstateClient = realEstateClient;
     }
 
-    public Set<UserModel> findAllUsers() {
+    public Set<RealtorModel> findAllRealtors() {
 
-        return userRepository.findAll().stream().map(userEntityToUserModel).collect(Collectors.toSet());
+        return realtorRepository.findAll().stream().map(realtorEntityToRealtorModel).collect(Collectors.toSet());
     }
 
-    public UserModel findUserById(String id) {
+    public RealtorModel findRealtorById(String id) {
 
-        Optional<UserEntity> user = userRepository.findById(id);
-        if (user.isPresent()) {
-            return userConverter.convertEntity2Model(user.get());
-        } else {
-            return null;
+        return realtorRepository.findById(id).map(realtorEntityToRealtorModel).orElseThrow(() -> new RealtorNotFound(id));
+    }
+
+    public Set<RealtorModel> findRealtorsByRealEstateId(String realEstateId) {
+        return realtorRepository.findRealtorByRealEstateId(realEstateId).stream().map(realtorEntityToRealtorModel).collect(Collectors.toSet());
+    }
+
+    public RealtorModel addRealtor(RealtorModel realtorModel) {
+
+        Optional.ofNullable(realEstateClient.getRealEstateById(realtorModel.getRealEstateId()))
+                .orElseThrow(() -> new RealEstateNotFound(realtorModel.getRealEstateId()));
+
+        realtorExistByDni(realtorModel.getDni());
+        realtorExistByEmail(realtorModel.getEmailContact());
+
+        RealtorEntity realtor = realtorRepository.save(realtorModelToRealtorEntity.apply(realtorModel));
+
+        return realtorEntityToRealtorModel.apply(realtor);
+    }
+
+    public void removeRealtor(String id) {
+        realtorRepository.deleteById(id);
+    }
+
+    private void realtorExistByDni(String dni) {
+        Optional<RealtorEntity> existByDni = realtorRepository.findRealtorByDni(dni);
+        if (existByDni.isPresent()) {
+            throw new RealtorDniAlReadyExist();
         }
     }
 
-    public List<UserModel> findUsersByRealEstateId(String realEstateId) {
-        List<UserModel> userList = new ArrayList<UserModel>();
-
-        for (UserEntity userEntity : userRepository.findUserByRealEstateId(realEstateId)) {
-            userList.add(userConverter.convertEntity2Model(userEntity));
-        }
-
-        return userList;
-    }
-
-    public ResponseEntity<UserModel> addUser(UserModel userModel) {
-        try {
-            if (realEstateClient.getRealEstateById(userModel.realEstateId) != null) {
-                UserEntity user = userRepository.save(userConverter.convertModel2Entity(userModel));
-
-                return new ResponseEntity<UserModel>(userConverter.convertEntity2Model(user), HttpStatus.CREATED);
-            } else {
-                return new ResponseEntity<UserModel>(HttpStatus.NOT_FOUND);
-            }
-
-        } catch (Exception e) {
-
-            return new ResponseEntity<UserModel>(HttpStatus.BAD_REQUEST);
-
+    private void realtorExistByEmail(String email) {
+        Optional<RealtorEntity> existByEmail = realtorRepository.findRealtorByEmailContact(email);
+        if (existByEmail.isPresent()) {
+            throw new RealtorEmailAlReadyExist();
         }
     }
-
-    public ResponseEntity<String> removeUser(String id) {
-        try {
-
-            userRepository.deleteById(id);
-
-            return new ResponseEntity<String>(HttpStatus.OK);
-
-        } catch (Exception e) {
-
-            return new ResponseEntity<String>(HttpStatus.BAD_REQUEST);
-
-        }
-    }
-
 }

@@ -1,4 +1,4 @@
-package com.inmoapp.usercomponent.model;
+package com.inmoapp.realtormanager.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

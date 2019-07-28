@@ -11,7 +11,7 @@ import org.springframework.context.annotation.Primary;
 @Configuration
 @EnableConfigurationProperties
 @ConfigurationProperties(prefix="documentation.swagger")
-public class SwaggerServiceCofig {
+public class SwaggerServiceConfig {
 
     List<SwaggerServices> swagger;
 

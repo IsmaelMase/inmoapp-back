@@ -1,22 +1,19 @@
 package com.inmoapp.realtormanager.service;
 
-import java.util.List;
+import com.inmoapp.realtormanager.model.RealtorModel;
+
 import java.util.Set;
 
-import org.springframework.http.ResponseEntity;
+public interface RealtorService {
 
-import com.inmoapp.realtormanager.model.UserModel;
+    Set<RealtorModel> findAllRealtors();
 
-public interface UserService {
+    RealtorModel findRealtorById(String id);
 
-	Set<UserModel> findAllUsers();
+    Set<RealtorModel> findRealtorsByRealEstateId(String realEstateId);
 
-	UserModel findUserById(String id);
+    RealtorModel addRealtor(RealtorModel realtor);
 
-	List<UserModel> findUsersByRealEstateId(String realEstateId);
-
-	ResponseEntity<UserModel> addUser(UserModel user);
-
-	ResponseEntity<String> removeUser(String id);
+    void removeRealtor(String id);
 
 }

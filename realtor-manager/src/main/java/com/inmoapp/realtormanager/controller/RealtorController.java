@@ -1,65 +1,56 @@
 package com.inmoapp.realtormanager.controller;
 
-import java.util.List;
-
-import javax.validation.Valid;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-
-import com.inmoapp.realtormanager.model.UserModel;
-import com.inmoapp.realtormanager.service.UserService;
-
+import com.inmoapp.realtormanager.model.RealtorModel;
+import com.inmoapp.realtormanager.service.RealtorService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import javax.validation.Valid;
+import java.util.Set;
 
 @RestController
-@RequestMapping("/users")
+@RequestMapping("/realtors")
 @CrossOrigin("*")
-@Api(tags = "users-controller")
-public class UserController {
+@Api(tags = "realtors-controller")
+public class RealtorController {
 
-	@Autowired
-	@Qualifier("userService")
-	private UserService userService;
+    private RealtorService realtorService;
 
-	@GetMapping(value = "findById/{id}")
-	@ApiOperation(value = "Find user by id")
-	public UserModel getUserById(@PathVariable("id") String id) {
-		return userService.findById(id);
-	}
+    public RealtorController(RealtorService realtorService) {
+        this.realtorService = realtorService;
+    }
 
-	@GetMapping(value = "findByRealEstate/{realEstateId}")
-	@ApiOperation(value = "Find users by real estate ID")
-	public List<UserModel> getUsersEstateId(@PathVariable("id") String realEstateId) {
-		return userService.findByRealEstateId(realEstateId);
-	}
+    @GetMapping(value = "findById/{id}")
+    @ApiOperation(value = "Find realtor by id")
+    public RealtorModel getRealtorById(@PathVariable("id") String id) {
+        return realtorService.findRealtorById(id);
+    }
 
-	@GetMapping(value = "/all")
-	@ApiOperation(value = "Find all users")
-	public List<UserModel> getAllUsers() {
-		return userService.findAll();
-	}
+    @GetMapping(value = "findByRealEstate/{realEstateId}")
+    @ApiOperation(value = "Find realtors by real estate ID")
+    public Set<RealtorModel> getRealtorsEstateId(@PathVariable("id") String realEstateId) {
+        return realtorService.findRealtorsByRealEstateId(realEstateId);
+    }
 
-	@PostMapping(value = "/save")
-	@ApiOperation(value = "Save user")
-	public ResponseEntity<UserModel> saveUser(@Valid @RequestBody UserModel user) {
-		return userService.addUser(user);
-	}
+    @GetMapping(value = "/all")
+    @ApiOperation(value = "Find all realtors")
+    public Set<RealtorModel> getAllRealtors() {
+        return realtorService.findAllRealtors();
+    }
 
-	@DeleteMapping(value = "/delete/{id}")
-	@ApiOperation(value = "Delete user")
-	public ResponseEntity<String> deleteUser(@PathVariable("id") String id) {
-		return userService.removeUser(id);
-	}
+    @PostMapping(value = "/save")
+    @ApiOperation(value = "Save realtor")
+    public ResponseEntity saveRealtor(@Valid @RequestBody RealtorModel realtor) {
+        return new ResponseEntity(realtorService.addRealtor(realtor), HttpStatus.CREATED);
+    }
+
+    @DeleteMapping(value = "/delete/{id}")
+    @ApiOperation(value = "Delete realtor")
+    public ResponseEntity deleteRealtor(@PathVariable("id") String id) {
+        return new ResponseEntity(HttpStatus.OK);
+    }
 
 }

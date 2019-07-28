@@ -1,8 +1,8 @@
 package com.inmoapp.realtormanager.model.exception;
 
-public class RealtorAlReadyExist extends RuntimeException {
-    public RealtorAlReadyExist() {
-        super("There is a realtor wiht the same DNI");
+public class RealtorDniAlReadyExist extends RuntimeException {
+    public RealtorDniAlReadyExist() {
+        super("There is a realtor with the same DNI");
     }
 }
 

@@ -1,13 +1,13 @@
 spring:
   data:
     mongodb:
-      database: users
+      database: realtors
       uri: mongodb://localhost:27017
   application:
-    name: users
+    name: realtor-manager
 server:
 #  servlet:
-#   context-path: /users
+#   context-path: /realtors
   port: 8080
 eureka:
   client:
