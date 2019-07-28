@@ -1,4 +1,4 @@
-package com.inmoapp.usercomponent.controller;
+package com.inmoapp.realtormanager.controller;
 
 import java.util.List;
 
@@ -16,8 +16,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.inmoapp.usercomponent.model.UserModel;
-import com.inmoapp.usercomponent.service.UserService;
+import com.inmoapp.realtormanager.model.UserModel;
+import com.inmoapp.realtormanager.service.UserService;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;

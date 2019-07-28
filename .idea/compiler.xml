@@ -18,11 +18,11 @@
     <bytecodeTargetLevel>
       <module name="core-rest-client" target="1.8" />
       <module name="core-security" target="1.8" />
-      <module name="Eureka-Server-App" target="11" />
-      <module name="real-estate-component" target="11" />
-      <module name="tasks-component" target="11" />
-      <module name="user-component" target="11" />
-      <module name="zuul-server" target="11" />
+      <module name="Eureka-Server-App" target="1.8" />
+      <module name="real-estate-component" target="1.8" />
+      <module name="tasks-component" target="1.8" />
+      <module name="user-component" target="1.8" />
+      <module name="zuul-server" target="1.8" />
     </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
