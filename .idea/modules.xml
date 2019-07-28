@@ -8,7 +8,7 @@
       <module fileurl="file://$PROJECT_DIR$/.idea/prueba microservicios.iml" filepath="$PROJECT_DIR$/.idea/prueba microservicios.iml" />
       <module fileurl="file://$PROJECT_DIR$/real-estate-manager/real-estate-manager.iml" filepath="$PROJECT_DIR$/real-estate-manager/real-estate-manager.iml" />
       <module fileurl="file://$PROJECT_DIR$/realtor-manager/realtor-manager.iml" filepath="$PROJECT_DIR$/realtor-manager/realtor-manager.iml" />
-      <module fileurl="file://$PROJECT_DIR$/tasks-component/tasks-component.iml" filepath="$PROJECT_DIR$/tasks-component/tasks-component.iml" />
+      <module fileurl="file://$PROJECT_DIR$/tasks-manager/tasks-manager.iml" filepath="$PROJECT_DIR$/tasks-manager/tasks-manager.iml" />
       <module fileurl="file://$PROJECT_DIR$/zuul-server/zuul-server.iml" filepath="$PROJECT_DIR$/zuul-server/zuul-server.iml" />
     </modules>
   </component>

@@ -16,7 +16,7 @@ import java.util.Set;
 @RestController
 @RequestMapping("/realEstate")
 @CrossOrigin("*")
-@Api(tags = "real-estate-component")
+@Api(tags = "real-estate-manager")
 public class RealEstateController {
 
     private final RealEstateService realEstateService;

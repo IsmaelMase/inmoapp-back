@@ -6,9 +6,9 @@
         <option value="$PROJECT_DIR$/core-security/pom.xml" />
         <option value="$PROJECT_DIR$/core-rest-client/pom.xml" />
         <option value="$PROJECT_DIR$/eureka-server-app/pom.xml" />
-        <option value="$PROJECT_DIR$/real-estate-component/pom.xml" />
-        <option value="$PROJECT_DIR$/tasks-component/pom.xml" />
-        <option value="$PROJECT_DIR$/user-component/pom.xml" />
+        <option value="$PROJECT_DIR$/real-estate-manager/pom.xml" />
+        <option value="$PROJECT_DIR$/tasks-manager/pom.xml" />
+        <option value="$PROJECT_DIR$/user-manager/pom.xml" />
         <option value="$PROJECT_DIR$/zuul-server/pom.xml" />
       </list>
     </option>
