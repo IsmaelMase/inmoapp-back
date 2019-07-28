@@ -17,7 +17,7 @@ import java.util.Set;
 @Api(tags = "realtors-controller")
 public class RealtorController {
 
-    private RealtorService realtorService;
+    private final RealtorService realtorService;
 
     public RealtorController(RealtorService realtorService) {
         this.realtorService = realtorService;
@@ -50,6 +50,7 @@ public class RealtorController {
     @DeleteMapping(value = "/delete/{id}")
     @ApiOperation(value = "Delete realtor")
     public ResponseEntity deleteRealtor(@PathVariable("id") String id) {
+        realtorService.removeRealtor(id);
         return new ResponseEntity(HttpStatus.OK);
     }
 

@@ -21,12 +21,12 @@ public class ErrorHandler {
 
     @ExceptionHandler(RealtorDniAlReadyExist.class)
     private ResponseEntity realtorDniAlReadyExist(RealtorDniAlReadyExist ex) {
-        return new ResponseEntity(ex.getMessage(), HttpStatus.BAD_REQUEST);
+        return new ResponseEntity(ex.getMessage(), HttpStatus.CONFLICT);
     }
 
     @ExceptionHandler(RealtorEmailAlReadyExist.class)
     private ResponseEntity realtorEmailAlReadyExist(RealtorEmailAlReadyExist ex) {
-        return new ResponseEntity(ex.getMessage(), HttpStatus.BAD_REQUEST);
+        return new ResponseEntity(ex.getMessage(), HttpStatus.CONFLICT);
     }
 }
 
