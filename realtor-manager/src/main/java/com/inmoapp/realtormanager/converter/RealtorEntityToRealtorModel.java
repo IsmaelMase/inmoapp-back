@@ -14,7 +14,7 @@ public class RealtorEntityToRealtorModel implements Function<RealtorEntity, Real
     public RealtorModel apply(RealtorEntity realtorEntity) {
         return RealtorModel.builder()
                 .id(realtorEntity.getId())
-                .dni(realtorEntity.getDni())
+                .nickname(realtorEntity.getNickname())
                 .emailContact(realtorEntity.getEmailContact())
                 .name(realtorEntity.getName())
                 .subname(realtorEntity.getSubname())

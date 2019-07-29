@@ -20,8 +20,6 @@ public class RealEstateEntity {
 	@Id
 	public String id;
 	@NotEmpty
-	private String cif;
-	@NotEmpty
 	public String name;
 	@NotEmpty
 	public String emailContact;

@@ -6,7 +6,7 @@ import com.inmoapp.realtormanager.converter.RealtorModelToRealtorEntity;
 import com.inmoapp.realtormanager.entity.RealtorEntity;
 import com.inmoapp.realtormanager.model.RealtorModel;
 import com.inmoapp.realtormanager.model.exception.RealEstateNotFound;
-import com.inmoapp.realtormanager.model.exception.RealtorDniAlReadyExist;
+import com.inmoapp.realtormanager.model.exception.RealtorNicknameAlReadyExist;
 import com.inmoapp.realtormanager.model.exception.RealtorEmailAlReadyExist;
 import com.inmoapp.realtormanager.model.exception.RealtorNotFound;
 import com.inmoapp.realtormanager.repository.RealtorRepository;
@@ -55,7 +55,7 @@ public class RealtorServiceImpl implements RealtorService {
         Optional.ofNullable(realEstateClient.getRealEstateById(realtorModel.getRealEstateId()))
                 .orElseThrow(() -> new RealEstateNotFound(realtorModel.getRealEstateId()));
 
-        realtorExistByDni(realtorModel.getDni());
+        realtorExistByNickname(realtorModel.getNickname());
         realtorExistByEmail(realtorModel.getEmailContact());
 
         RealtorEntity realtor = realtorRepository.save(realtorModelToRealtorEntity.apply(realtorModel));
@@ -67,10 +67,10 @@ public class RealtorServiceImpl implements RealtorService {
         realtorRepository.deleteById(id);
     }
 
-    private void realtorExistByDni(String dni) {
-        Optional<RealtorEntity> existByDni = realtorRepository.findRealtorByDni(dni);
-        if (existByDni.isPresent()) {
-            throw new RealtorDniAlReadyExist();
+    private void realtorExistByNickname(String nickname) {
+        Optional<RealtorEntity> existByNickname = realtorRepository.findRealtorByNickname(nickname);
+        if (existByNickname.isPresent()) {
+            throw new RealtorNicknameAlReadyExist();
         }
     }
 

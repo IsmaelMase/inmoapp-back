@@ -9,5 +9,4 @@ import java.util.Optional;
 
 @Repository
 public interface RealEstateRepository extends MongoRepository<RealEstateEntity, String> {
-    Optional<RealEstateEntity> findRealEstateByCif(String cif);
 }

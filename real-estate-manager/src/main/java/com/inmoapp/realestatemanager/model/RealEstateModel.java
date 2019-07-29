@@ -3,6 +3,7 @@ package com.inmoapp.realestatemanager.model;
 import lombok.*;
 
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 
 @Getter
 @Setter
@@ -11,9 +12,8 @@ import javax.validation.constraints.NotEmpty;
 @Builder
 public class RealEstateModel {
 
+    @NotNull
     public String id;
-    @NotEmpty
-    private String cif;
     @NotEmpty
     public String name;
     @NotEmpty

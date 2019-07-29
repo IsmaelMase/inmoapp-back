@@ -18,9 +18,7 @@ public class RealtorModel {
 
 	public String id;
 	@NotEmpty
-	public String dni;
-//	@NotEmpty
-//	public String userNick;
+	public String nickname;
 	@NotEmpty
 	public String name;
 	@NotEmpty

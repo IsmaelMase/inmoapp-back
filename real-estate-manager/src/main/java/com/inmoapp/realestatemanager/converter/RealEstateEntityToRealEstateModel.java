@@ -13,7 +13,6 @@ public class RealEstateEntityToRealEstateModel implements Function<RealEstateEnt
     public RealEstateModel apply(RealEstateEntity realEstateEntity) {
         return RealEstateModel.builder()
                 .id(realEstateEntity.getId())
-                .cif(realEstateEntity.getCif())
                 .name(realEstateEntity.getName())
                 .phoneContacte(realEstateEntity.getPhoneContacte())
                 .emailContact((realEstateEntity.getEmailContact()))

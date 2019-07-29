@@ -16,7 +16,7 @@ import java.util.Set;
 @RestController
 @RequestMapping("/realEstate")
 @CrossOrigin("*")
-@Api(tags = "real-estate-manager")
+@Api(tags = "real-estate-controller")
 public class RealEstateController {
 
     private final RealEstateService realEstateService;
@@ -37,10 +37,16 @@ public class RealEstateController {
         return realEstateService.findAllRealEstate();
     }
 
-    @PostMapping(value = "/save")
-    @ApiOperation(value = "Save real estate")
-    public ResponseEntity saveRealEstate(@Valid @RequestBody RealEstateModel realEstate) {
+    @PostMapping(value = "/add")
+    @ApiOperation(value = "Add new real estate")
+    public ResponseEntity addRealEstate(@Valid @RequestBody RealEstateModel realEstate) {
         return new ResponseEntity(realEstateService.addRealEstate(realEstate), HttpStatus.CREATED);
+    }
+
+    @PutMapping(value = "/update")
+    @ApiOperation(value = "Update real estate")
+    public ResponseEntity updateRealEstate(@Valid @RequestBody RealEstateModel realEstate) {
+        return new ResponseEntity(realEstateService.updateRealEstate(realEstate), HttpStatus.OK);
     }
 
     @DeleteMapping(value = "/delete/{id}")

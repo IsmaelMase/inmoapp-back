@@ -17,8 +17,7 @@ public class RealtorEntity {
 
 	@Id
 	public String id;
-	public String dni;
-//	public String userNick;
+	public String nickname;
 	public String name;
 	public String subname;
 	public String emailContact;

@@ -15,5 +15,7 @@ public interface RealEstateService {
 
 	public RealEstateModel addRealEstate(RealEstateModel realEstate);
 
+	public RealEstateModel updateRealEstate(RealEstateModel realEstate);
+
 	public void removeRealEstate(String id);
 }

@@ -4,7 +4,6 @@ import com.inmoapp.realestatemanager.converter.RealEstateEntityToRealEstateModel
 import com.inmoapp.realestatemanager.converter.RealEstateModelToRealEstateEntity;
 import com.inmoapp.realestatemanager.entity.RealEstateEntity;
 import com.inmoapp.realestatemanager.model.RealEstateModel;
-import com.inmoapp.realestatemanager.model.exception.RealEstateCifAlReadyExist;
 import com.inmoapp.realestatemanager.model.exception.RealEstateNotFound;
 import com.inmoapp.realestatemanager.repository.RealEstateRepository;
 import com.inmoapp.realestatemanager.service.RealEstateService;
@@ -39,23 +38,31 @@ public class RealEstateServiceImpl implements RealEstateService {
     }
 
     public RealEstateModel addRealEstate(RealEstateModel realEstateModel) {
-
-        realEstateByCif(realEstateModel.getCif());
+        realEstateModel.setId(null);
 
         RealEstateEntity realEstate = realEstateRepository.save(realEstateModelToRealEstateEntity.apply(realEstateModel));
 
         return realEstateEntityToRealEstateModel.apply(realEstate);
     }
 
-    public void removeRealEstate(String id) {
-        realEstateRepository.deleteById(id);
+    public RealEstateModel updateRealEstate(RealEstateModel realEstateModel) {
+
+        existRealEstateById(realEstateModel.getId());
+
+        RealEstateEntity realEstate = realEstateRepository.save(realEstateModelToRealEstateEntity.apply(realEstateModel));
+
+        return realEstateEntityToRealEstateModel.apply(realEstate);
     }
 
-    private void realEstateByCif(String cif) {
-        Optional<RealEstateEntity> realEstateByCif = realEstateRepository.findRealEstateByCif(cif);
-        if (realEstateByCif.isPresent()) {
-            throw new RealEstateCifAlReadyExist();
+    private void existRealEstateById(String id) {
+        Optional<RealEstateEntity> realEstateById=realEstateRepository.findById(id);
+        if(!realEstateById.isPresent()){
+            throw new RealEstateNotFound(id);
         }
+    }
+
+    public void removeRealEstate(String id) {
+        realEstateRepository.deleteById(id);
     }
 
 }

@@ -19,8 +19,8 @@ public class ErrorHandler {
         return new ResponseEntity(ex.getMessage(), HttpStatus.NOT_FOUND);
     }
 
-    @ExceptionHandler(RealtorDniAlReadyExist.class)
-    private ResponseEntity realtorDniAlReadyExist(RealtorDniAlReadyExist ex) {
+    @ExceptionHandler(RealtorNicknameAlReadyExist.class)
+    private ResponseEntity realtorNicknameAlReadyExist(RealtorNicknameAlReadyExist ex) {
         return new ResponseEntity(ex.getMessage(), HttpStatus.CONFLICT);
     }
 

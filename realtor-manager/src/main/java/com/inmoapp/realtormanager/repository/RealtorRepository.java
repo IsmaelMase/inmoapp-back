@@ -14,8 +14,8 @@ public interface RealtorRepository extends MongoRepository<RealtorEntity, String
 
 	Set<RealtorEntity> findRealtorByRealEstateId(String realEstateId);
 
-	Optional<RealtorEntity> findRealtorByDni(String dni);
+	Optional<RealtorEntity> findRealtorByNickname(String nickname);
 
-	Optional<RealtorEntity> findRealtorByEmailContact(String dni);
+	Optional<RealtorEntity> findRealtorByEmailContact(String email);
 
 }
