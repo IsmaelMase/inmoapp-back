@@ -27,9 +27,7 @@ import springfox.documentation.swagger.web.SecurityConfiguration;
 import springfox.documentation.swagger.web.SecurityConfigurationBuilder;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
-//Anotar como  configuración de Spring
 @Configuration
-// Habilitar Swagger
 @EnableSwagger2
 public class SwaggerConfig {
 
@@ -39,30 +37,11 @@ public class SwaggerConfig {
 	@Autowired
 	private Environment environment;
 
-	@Autowired
-	private SwaggerServiceCofig routeLocator;
-
-	// private static final Set<String> DEFAULT_PRODUCES_AND_CONSUMES = new
-	// HashSet<String>(
-	// Arrays.asList("application/json", "application/xml"));
 	private static final Set<String> DEFAULT_PRODUCES_AND_CONSUMES = new HashSet<String>(
 			Arrays.asList("application/json"));
 
-	// Definir el Bean Docket
-
 	@Bean
 	public Docket api() {
-
-		// Boolean profileWAR = false;
-		//
-		// String[] profiles = this.environment.getActiveProfiles();
-
-		// for (String profile : profiles) {
-		// if (profile.equalsIgnoreCase("war")) {
-		// profileWAR = true;
-		// break;
-		// }
-		// }
 
 		Docket docket = new Docket(DocumentationType.SWAGGER_2).apiInfo(apiInfo())
 				.produces(DEFAULT_PRODUCES_AND_CONSUMES).consumes(DEFAULT_PRODUCES_AND_CONSUMES).select()
@@ -72,13 +51,6 @@ public class SwaggerConfig {
 		docket.securitySchemes(Arrays.asList(apiKey())).securityContexts(Arrays.asList(securityContext()));
 		return docket;
 	}
-
-	// @Bean
-	// public Docket api() {
-	// return new
-	// Docket(DocumentationType.SWAGGER_2).apiInfo(apiInfo()).select().apis(RequestHandlerSelectors.any())
-	// .paths(Predicates.not(PathSelectors.regex("/error"))).build();
-	// }
 
 	private ApiInfo apiInfo() {
 		return new ApiInfoBuilder().title("AppIn Backend").description("Swagger").version("0.1").build();
