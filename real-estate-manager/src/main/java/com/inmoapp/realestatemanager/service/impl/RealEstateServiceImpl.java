@@ -38,7 +38,7 @@ public class RealEstateServiceImpl implements RealEstateService {
     }
 
     public RealEstateModel addRealEstate(RealEstateModel realEstateModel) {
-        realEstateModel.setId(null);
+        realEstateModel.setId("");
 
         RealEstateEntity realEstate = realEstateRepository.save(realEstateModelToRealEstateEntity.apply(realEstateModel));
 
