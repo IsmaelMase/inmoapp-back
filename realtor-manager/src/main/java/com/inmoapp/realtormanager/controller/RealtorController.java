@@ -41,10 +41,16 @@ public class RealtorController {
         return realtorService.findAllRealtors();
     }
 
-    @PostMapping(value = "/save")
-    @ApiOperation(value = "Save realtor")
-    public ResponseEntity saveRealtor(@Valid @RequestBody RealtorModel realtor) {
+    @PostMapping(value = "/add")
+    @ApiOperation(value = "Add realtor")
+    public ResponseEntity addRealtor(@Valid @RequestBody RealtorModel realtor) {
         return new ResponseEntity(realtorService.addRealtor(realtor), HttpStatus.CREATED);
+    }
+
+    @PutMapping(value = "/update")
+    @ApiOperation(value = "Update realtor")
+    public ResponseEntity updateRealtor(@Valid @RequestBody RealtorModel realtor) {
+        return new ResponseEntity(realtorService.updateRealtor(realtor), HttpStatus.OK);
     }
 
     @DeleteMapping(value = "/delete/{id}")

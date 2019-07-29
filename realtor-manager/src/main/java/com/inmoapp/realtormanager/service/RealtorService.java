@@ -14,6 +14,8 @@ public interface RealtorService {
 
     RealtorModel addRealtor(RealtorModel realtor);
 
+    RealtorModel updateRealtor(RealtorModel realtor);
+
     void removeRealtor(String id);
 
 }

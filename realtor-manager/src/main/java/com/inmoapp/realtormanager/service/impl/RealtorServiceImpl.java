@@ -6,8 +6,8 @@ import com.inmoapp.realtormanager.converter.RealtorModelToRealtorEntity;
 import com.inmoapp.realtormanager.entity.RealtorEntity;
 import com.inmoapp.realtormanager.model.RealtorModel;
 import com.inmoapp.realtormanager.model.exception.RealEstateNotFound;
-import com.inmoapp.realtormanager.model.exception.RealtorNicknameAlReadyExist;
 import com.inmoapp.realtormanager.model.exception.RealtorEmailAlReadyExist;
+import com.inmoapp.realtormanager.model.exception.RealtorNicknameAlReadyExist;
 import com.inmoapp.realtormanager.model.exception.RealtorNotFound;
 import com.inmoapp.realtormanager.repository.RealtorRepository;
 import com.inmoapp.realtormanager.service.RealtorService;
@@ -51,33 +51,75 @@ public class RealtorServiceImpl implements RealtorService {
     }
 
     public RealtorModel addRealtor(RealtorModel realtorModel) {
+        realtorModel.setId("");
 
         Optional.ofNullable(realEstateClient.getRealEstateById(realtorModel.getRealEstateId()))
                 .orElseThrow(() -> new RealEstateNotFound(realtorModel.getRealEstateId()));
 
-        realtorExistByNickname(realtorModel.getNickname());
-        realtorExistByEmail(realtorModel.getEmailContact());
+        realtorExistByNickname(realtorModel.getNickname(), null);
+        realtorExistByEmail(realtorModel.getEmailContact(), null);
 
         RealtorEntity realtor = realtorRepository.save(realtorModelToRealtorEntity.apply(realtorModel));
 
         return realtorEntityToRealtorModel.apply(realtor);
     }
 
+    public RealtorModel updateRealtor(RealtorModel realtorModel) {
+
+        existRealtorById(realtorModel.getId());
+
+        Optional.ofNullable(realEstateClient.getRealEstateById(realtorModel.getRealEstateId()))
+                .orElseThrow(() -> new RealEstateNotFound(realtorModel.getRealEstateId()));
+
+        realtorExistByNickname(realtorModel.getNickname(), realtorModel.getId());
+        realtorExistByEmail(realtorModel.getEmailContact(), realtorModel.getId());
+
+        RealtorEntity realtor = realtorRepository.save(realtorModelToRealtorEntity.apply(realtorModel));
+
+        return realtorEntityToRealtorModel.apply(realtor);
+    }
+
+
     public void removeRealtor(String id) {
         realtorRepository.deleteById(id);
     }
 
-    private void realtorExistByNickname(String nickname) {
-        Optional<RealtorEntity> existByNickname = realtorRepository.findRealtorByNickname(nickname);
-        if (existByNickname.isPresent()) {
-            throw new RealtorNicknameAlReadyExist();
+    private void realtorExistByNickname(String nickname, String realtorId) {
+        if (realtorId == null) {
+            Optional<RealtorEntity> existByNickname = realtorRepository.findRealtorByNickname(nickname);
+            if (existByNickname.isPresent()) {
+                throw new RealtorNicknameAlReadyExist();
+            }
+        } else {
+            Optional<RealtorEntity> existByNickname = realtorRepository.findRealtorByNickname(nickname);
+            if (existByNickname.isPresent()) {
+                if (!existByNickname.get().getId().equals(realtorId)) {
+                    throw new RealtorEmailAlReadyExist();
+                }
+            }
         }
     }
 
-    private void realtorExistByEmail(String email) {
-        Optional<RealtorEntity> existByEmail = realtorRepository.findRealtorByEmailContact(email);
-        if (existByEmail.isPresent()) {
-            throw new RealtorEmailAlReadyExist();
+    private void realtorExistByEmail(String email, String realtorId) {
+        if (realtorId == null) {
+            Optional<RealtorEntity> existByEmail = realtorRepository.findRealtorByEmailContact(email);
+            if (existByEmail.isPresent()) {
+                throw new RealtorEmailAlReadyExist();
+            }
+        } else {
+            Optional<RealtorEntity> existByEmail = realtorRepository.findRealtorByEmailContact(email);
+            if (existByEmail.isPresent()) {
+                if (!existByEmail.get().getId().equals(realtorId)) {
+                    throw new RealtorEmailAlReadyExist();
+                }
+            }
+        }
+    }
+
+    private void existRealtorById(String realtorId) {
+        Optional<RealtorEntity> existById = realtorRepository.findById(realtorId);
+        if (!existById.isPresent()) {
+            throw new RealtorNotFound(realtorId);
         }
     }
 }
