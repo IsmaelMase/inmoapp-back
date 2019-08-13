@@ -18,6 +18,8 @@ zuul:
       serviceId: real-estate
     tasks:
       serviceId: tasks
+    clients:
+      serviceId: clients
   host:
     socket-timeout-millis: 30000
 swagger:
