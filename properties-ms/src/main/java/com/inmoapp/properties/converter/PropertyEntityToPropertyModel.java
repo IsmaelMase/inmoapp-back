@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
 import java.util.function.Function;
 
 @Component
-public class PropertyEntytyToPropertyModel implements Function<PropertyEntity, PropertyModel> {
+public class PropertyEntityToPropertyModel implements Function<PropertyEntity, PropertyModel> {
     @Override
     public PropertyModel apply(PropertyEntity propertyEntity) {
         return PropertyModel.builder()

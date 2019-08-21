@@ -1,4 +1,4 @@
-package com.inmoapp.tasks.model;
+package com.inmoapp.properties.model;
 
 import lombok.*;
 

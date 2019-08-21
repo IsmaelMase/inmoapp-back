@@ -20,6 +20,8 @@ zuul:
       serviceId: tasks
     clients:
       serviceId: clients
+    properties:
+      serviceId: properties
   host:
     socket-timeout-millis: 30000
 swagger:

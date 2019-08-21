@@ -13,7 +13,7 @@ public class TaskEntityToTaskModel implements Function<TaskEntity, TaskModel> {
         return TaskModel.builder()
                 .id(taskEntity.getId())
                 .description(taskEntity.getDescription())
-                .codref(taskEntity.getCodref())
+                .propertyId(taskEntity.getPropertyId())
                 .state(taskEntity.getState())
                 .realtorId(taskEntity.getRealtorId())
                 .build();

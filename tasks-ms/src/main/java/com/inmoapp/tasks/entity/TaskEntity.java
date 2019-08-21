@@ -22,7 +22,7 @@ public class TaskEntity {
 	@NotEmpty
 	public String description;
 	@NotEmpty
-	public String codref;
+	public String propertyId;
 	@NotEmpty
 	public String state;
 	@NotEmpty
