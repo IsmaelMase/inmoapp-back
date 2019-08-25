@@ -11,7 +11,7 @@ public class PropertyModelToPropertyEntity implements Function<PropertyModel, Pr
     @Override
     public PropertyEntity apply(PropertyModel propertyModel) {
         return PropertyEntity.builder()
-                .id(propertyModel.getId())
+                .id(!propertyModel.getId().isEmpty() ? propertyModel.getId() : null)
                 .codRef(propertyModel.getCodRef())
                 .address(propertyModel.getAddress())
                 .alt(propertyModel.getAlt())

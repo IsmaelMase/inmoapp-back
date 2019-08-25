@@ -14,5 +14,4 @@ public interface TaskRepository extends MongoRepository<TaskEntity, String>{
 	List<TaskEntity> findTaskByRealtorId(String realtorId);
 	
 	List<TaskEntity> findTaskByState(String state);
-
 }

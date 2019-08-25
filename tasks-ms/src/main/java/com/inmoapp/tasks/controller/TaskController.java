@@ -1,5 +1,7 @@
 package com.inmoapp.tasks.controller;
 
+import com.inmoapp.tasks.model.CommentModel;
+import com.inmoapp.tasks.model.ResponseTaskModel;
 import com.inmoapp.tasks.model.TaskModel;
 import com.inmoapp.tasks.service.TaskService;
 import io.swagger.annotations.Api;
@@ -9,6 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.HashMap;
 import java.util.Set;
 
 @RestController
@@ -47,6 +50,18 @@ public class TaskController {
         return taskService.findAllTasks();
     }
 
+    @GetMapping(value = "/allOrder")
+    @ApiOperation(value = "Find all task order by state")
+    public HashMap<String, Set<ResponseTaskModel>> getAllTasksOrderByState() {
+        return taskService.findAllTasksOrderByState();
+    }
+
+    @PostMapping(value = "/saveInitTask/{realtorId}/{propertyId}")
+    @ApiOperation(value = "Save init task")
+    public ResponseEntity saveInitTask(@PathVariable("realtorId") String realtorId, @PathVariable("propertyId") String propertyId) {
+        return new ResponseEntity(taskService.createInitTask(realtorId, propertyId), HttpStatus.OK);
+    }
+
     @PostMapping(value = "/save")
     @ApiOperation(value = "Save task")
     public ResponseEntity saveTask(@Valid @RequestBody TaskModel task) {
@@ -58,5 +73,17 @@ public class TaskController {
     public ResponseEntity deleteTask(@PathVariable("id") String id) {
         taskService.removeTask(id);
         return new ResponseEntity(HttpStatus.OK);
+    }
+
+    @PatchMapping(value = "/addComment/{id}")
+    @ApiOperation(value = "Add comment task")
+    public ResponseEntity addCommentToTask(@PathVariable("id") String id, @Valid @RequestBody CommentModel commentModel) {
+        return new ResponseEntity(taskService.addCommentToTask(id, commentModel), HttpStatus.OK);
+    }
+
+    @PatchMapping(value = "/changeState/{id}")
+    @ApiOperation(value = "Change state task")
+    public ResponseEntity changeStateToTask(@PathVariable("id") String id, @Valid @RequestBody String state) {
+        return new ResponseEntity(taskService.changeState(id, state), HttpStatus.OK);
     }
 }

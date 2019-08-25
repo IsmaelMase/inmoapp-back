@@ -50,14 +50,16 @@ public class PropertyServiceImpl implements PropertyService {
     }
 
     @Override
-    public PropertyModel addProperty(PropertyModel propertyModel) {
+    public PropertyModel addProperty(PropertyModel propertyModel, String realtorId) {
         propertyModel.setId("");
 
         propertyExistByCodRef(propertyModel.getCodRef());
 
-        PropertyEntity realtor = propertyRepository.save(propertyModelToPropertyEntity.apply(propertyModel));
+        PropertyEntity propertyEntity = propertyRepository.save(propertyModelToPropertyEntity.apply(propertyModel));
 
-        return propertyEntityToPropertyModel.apply(realtor);
+        tasksClient.saveInitTask(realtorId, propertyEntity.getId());
+
+        return propertyEntityToPropertyModel.apply(propertyEntity);
     }
 
     @Override

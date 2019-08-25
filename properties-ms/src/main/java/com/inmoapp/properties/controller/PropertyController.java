@@ -23,13 +23,13 @@ public class PropertyController {
         this.propertyService = propertyService;
     }
 
-    @GetMapping(value = "/{id}")
+    @GetMapping(value = "/findById/{id}")
     @ApiOperation(value = "Find property by id")
     public PropertyModel getPropertyById(@PathVariable("id") String id) {
         return propertyService.findPropertyById(id);
     }
 
-    @GetMapping(value = "/{codRef}")
+    @GetMapping(value = "findByCodRef/{codRef}")
     @ApiOperation(value = "Find property by CodRef")
     public PropertyModel getPropertyByCorRef(@PathVariable("id") String codRef) {
         return propertyService.findPropertyByCodRef(codRef);
@@ -41,10 +41,10 @@ public class PropertyController {
         return propertyService.findAllProperties();
     }
 
-    @PostMapping(value = "/save")
+    @PostMapping(value = "/save/{realtorId}")
     @ApiOperation(value = "Save property")
-    public ResponseEntity saveProperty(@Valid @RequestBody PropertyModel property) {
-        return new ResponseEntity(propertyService.addProperty(property), HttpStatus.OK);
+    public ResponseEntity saveProperty(@PathVariable("realtorId") String realtorId, @Valid @RequestBody PropertyModel property) {
+        return new ResponseEntity(propertyService.addProperty(property, realtorId), HttpStatus.OK);
     }
 
     @DeleteMapping(value = "/delete/{id}")

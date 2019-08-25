@@ -11,7 +11,7 @@ public interface PropertyService {
 
     PropertyModel findPropertyByCodRef(String codRef);
 
-    PropertyModel addProperty(PropertyModel propertyModel);
+    PropertyModel addProperty(PropertyModel propertyModel, String realtorId);
 
     void removeProperty(String id);
 }

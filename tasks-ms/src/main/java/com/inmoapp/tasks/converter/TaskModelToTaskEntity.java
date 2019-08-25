@@ -12,10 +12,10 @@ public class TaskModelToTaskEntity implements Function<TaskModel, TaskEntity> {
     public TaskEntity apply(TaskModel taskModel) {
         return TaskEntity.builder()
                 .id(!taskModel.getId().isEmpty() ? taskModel.getId() : null)
-                .description(taskModel.getDescription())
                 .propertyId(taskModel.getPropertyId())
                 .state(taskModel.getState())
                 .realtorId(taskModel.getRealtorId())
+                .comments(taskModel.getComments())
                 .build();
     }
 }

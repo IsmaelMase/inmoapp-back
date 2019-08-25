@@ -1,5 +1,6 @@
 package com.inmoapp.tasks.entity;
 
+import com.inmoapp.tasks.model.CommentModel;
 import lombok.*;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -7,6 +8,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 import io.swagger.annotations.ApiModel;
 
 import javax.validation.constraints.NotEmpty;
+import java.util.List;
 
 @Document(collection = "tasks")
 @Getter
@@ -27,5 +29,6 @@ public class TaskEntity {
 	public String state;
 	@NotEmpty
 	public String realtorId;
+	public List<CommentModel> comments;
 
 }
