@@ -1,0 +1,13 @@
+version: '3'
+services:
+
+  eureka-server-app:
+    image: ismaelmase/eureka-server-app
+    ports:
+      - "8761:8761"
+  zuul-server:
+    image: ismaelmase/zuul-server
+    ports:
+      - "8762:8762"
+    links:
+      - eureka-server-app
