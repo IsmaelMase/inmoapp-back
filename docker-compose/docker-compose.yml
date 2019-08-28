@@ -1,6 +1,18 @@
 version: '3'
 services:
-
+# mongo:
+#    image: mongo:latest
+#    ports:
+#    - 27017:27017
+#    command: --smallfiles
+#    volumes:
+#      - './data:/data/db'
+#  mongoclient:
+#    image: mongoclient/mongoclient:latest
+#    ports:
+#      - 3000:3000
+#    links:
+#      - mongo
   eureka-server-app:
     image: ismaelmase/eureka-server-app
     ports:
@@ -9,5 +21,18 @@ services:
     image: ismaelmase/zuul-server
     ports:
       - "8762:8762"
+    links:
+      - eureka-server-app
+  real-estate-ms:
+    image: ismaelmase/real-estate-ms
+    ports:
+      - "8081:8081"
+    links:
+      - eureka-server-app
+      - mongo
+  realtors-ms:
+    image: ismaelmase/realtors-ms
+    ports:
+      - "8082:8082"
     links:
       - eureka-server-app
