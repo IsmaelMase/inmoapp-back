@@ -37,3 +37,17 @@ services:
     links:
       - eureka-server-app
       - mongo
+  properties-ms:
+    image: ismaelmase/properties-ms
+    ports:
+      - "8083:8083"
+    links:
+      - eureka-server-app
+      - mongo
+  tasks-ms:
+    image: ismaelmase/tasks-ms
+    ports:
+      - "8082:8082"
+    links:
+      - eureka-server-app
+      - mongo
