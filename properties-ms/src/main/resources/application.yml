@@ -2,8 +2,9 @@ spring:
   data:
     mongodb:
       database: properties
-      uri: mongodb://localhost:27017
-      #  uri: mongodb+srv://admin:admin@cluster0-yuvo1.mongodb.net/properties?retryWrites=true&w=majority
+      uri: mongodb://mongo:27017
+#     uri: mongodb://mongo:27017
+#     uri: mongodb+srv://admin:admin@cluster0-yuvo1.mongodb.net/tasks?retryWrites=true&w=majority
   application:
     name: properties
 server:
@@ -13,7 +14,8 @@ server:
 eureka:
   client:
     serviceUrl:
-      defaultZone: http://localhost:8761/eureka/
+      #  defaultZone: http://eureka-server-app:8761/eureka/
+      defaultZone: http://eureka-server-app:8761/eureka/
   instance:
     preferIpAddress: true
 swagger:
