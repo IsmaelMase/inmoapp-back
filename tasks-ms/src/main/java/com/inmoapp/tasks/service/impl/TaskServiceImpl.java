@@ -58,10 +58,10 @@ public class TaskServiceImpl implements TaskService {
         Set<ResponseTaskModel> okTasks = taskRepository.findTaskByState(taskConstants.PROPERTY_OK).stream().map(taskEntityToResponseTaskModel).collect(Collectors.toSet());
 
         HashMap<String, Set<ResponseTaskModel>> allMapTasks = new HashMap<>();
-        allMapTasks.put(taskConstants.INTERESTING, interestingTasks);
-        allMapTasks.put(taskConstants.PROPERTY_CONTACT, inContactTasks);
-        allMapTasks.put(taskConstants.PROPERTY_BLOCKED, blockedTasks);
-        allMapTasks.put(taskConstants.PROPERTY_OK, okTasks);
+        allMapTasks.put(taskConstants.INTERESTING.toLowerCase(), interestingTasks);
+        allMapTasks.put(taskConstants.PROPERTY_CONTACT.toLowerCase(), inContactTasks);
+        allMapTasks.put(taskConstants.PROPERTY_BLOCKED.toLowerCase(), blockedTasks);
+        allMapTasks.put(taskConstants.PROPERTY_OK.toLowerCase(), okTasks);
 
         return allMapTasks;
     }
